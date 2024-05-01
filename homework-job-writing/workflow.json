@@ -1,0 +1,21 @@
+{
+  "workflow": {
+    "steps": [
+      {
+        "id": "getPatients",
+        "adaptor": "http",
+        "state": {},
+        "configuration": "./tmp/emr-credential.json",
+        "expression": "./jobs/getPatients.js",
+        "next": { "postPatients": { "condition": "true" } }
+      },
+      {
+        "id": "postPatients",
+        "adaptor": "salesforce",
+        "configuration": "./tmp/sf-credential.json",
+        "state": {},
+        "expression": "./jobs/syncToSalesforce.js"
+      }
+    ]
+  }
+}

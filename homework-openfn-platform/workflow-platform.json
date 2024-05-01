@@ -1,0 +1,37 @@
+{
+  "workflow": {
+    "steps": [
+      {
+        "id": "surveyCTO",
+        "adaptor": "surveycto",
+        "configuration": "tmp/surveycto-creds.json",
+        "expression": "jobs/surveyCTO.js",
+        "next": { "transform": "!state.errors" }
+      },
+      {
+        "id": "transform",
+        "adaptor": "common",
+        "expression": "jobs/transform.js",
+        "next": { "query": "!state.errors" }
+      },
+      {
+        "id": "query",
+        "adaptor": "salesforce",
+        "expresson": "jobs/query.js",
+        "next": { "uploadToSF": "!state.errors", "createObjSF": "state.errors" }
+      },
+      {
+        "id": "createObjSF",
+        "adaptor": "salesforce",
+        "expression": "jobs/createObjSF.js",
+        "next": { "uploadToSF": "!state.errors" }
+      },
+      {
+        "id": "uploadToSF",
+        "adaptor": "salesforce",
+        "configuration": "tmp/sf-credential.json",
+        "expression": "jobs/uploadToSF.js"
+      }
+    ]
+  }
+}
