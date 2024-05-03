@@ -12,13 +12,7 @@
         "id": "transform",
         "adaptor": "common",
         "expression": "jobs/transform.js",
-        "next": { "query": "!state.errors" }
-      },
-      {
-        "id": "query",
-        "adaptor": "salesforce",
-        "expresson": "jobs/query.js",
-        "next": { "uploadToSF": "!state.errors", "createObjSF": "state.errors" }
+        "next": { "createObjSF": "!state.errors" }
       },
       {
         "id": "createObjSF",
