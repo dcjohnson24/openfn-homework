@@ -18,6 +18,7 @@
         "id": "createObjSF",
         "adaptor": "salesforce",
         "expression": "jobs/createObjSF.js",
+        "configuration": "tmp/sf-credential.json",
         "next": { "uploadToSF": "!state.errors" }
       },
       {
