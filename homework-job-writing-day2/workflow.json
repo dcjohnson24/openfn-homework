@@ -1,0 +1,27 @@
+{
+    "workflow": {
+      "steps": [
+        {
+          "id": "getPatientRows",
+          "adaptor": "postgresql",
+          "configuration": "./tmp/postgres-creds.json",
+          "expression": "./jobs/getPatientRows.js",
+          "next": { "calculateIndicators": { "condition": "!state.errors" } }
+        },
+        {
+            "id": "calculateIndicators",
+            "adaptor": "postgresql",
+            "configuration":"./tmp/postgres-creds.json",
+            "expression": "./jobs/calculateIndicators.js",
+            "next": { "createResults": { "condition" : "!state.errors"}}
+        },
+        {
+          "id": "createResults",
+          "adaptor": "salesforce",
+          "configuration": "./tmp/sf-credential.json",
+          "expression": "./jobs/createResults.js"
+        }
+      ]
+    }
+  }
+  
