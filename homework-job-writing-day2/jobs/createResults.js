@@ -1,10 +1,11 @@
 each('$.records[*]', 
-  create('vera__Indicator_Result__c', $.data)
+  create('Indicator_Result__c', $.data)
 )
 
+// [R/T] ✘ AdaptorError: The requested resource does not exist
 bulk(
-    'vera__Indicator_Result__c',
+    'Indicator_Result__c',
     'upsert', 
-    {extIdField: 'vera__Result_UID__c', failOnError: true, allowNoOp: true},
+    {extIdField: 'Result_UID__c', failOnError: true, allowNoOp: true},
     state => state.records
 );

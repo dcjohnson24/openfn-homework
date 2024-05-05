@@ -18,11 +18,11 @@ fn(state => {
         let reportingPeriod = getYear(i.registration_date)
         let geoArea = geoMapping[i.village_name]
         return {
-            vera__Reporting_Period__c : reportingPeriod,
-            vera__Geographic_Area__c : geoArea,
-            "vera__Indicator__r.ExtId__c" : "1001",
-            vera__Value__c: i.num_enrolled_patients,
-            vera__Result_UID__c: makeUID(["1001", reportingPeriod, geoArea]) 
+            Reporting_Period__c : reportingPeriod,
+            Geographic_Area__c : geoArea,
+            "Indicator__r.ExtId__c" : "1001",
+            Value__c: i.num_enrolled_patients,
+            Result_UID__c: makeUID(["1001", reportingPeriod, geoArea]) 
         }  
     })
     
@@ -30,11 +30,11 @@ fn(state => {
         let reportingPeriod = getYear(i.registration_date)
         let geoArea = geoMapping[i.village_name]
         return {
-            vera__Reporting_Period__c : reportingPeriod,
-            vera__Geographic_Area__c : geoArea,
-            "vera__Indicator__r.ExtId__c": "1002",
-            vera__Value__c: i.num_opv_doses_given,
-            vera__Result_UID__c: makeUID(["1002", reportingPeriod, geoArea])
+            Reporting_Period__c : reportingPeriod,
+            Geographic_Area__c : geoArea,
+            "Indicator__r.ExtId__c": "1002",
+            Value__c: i.num_opv_doses_given,
+            Result_UID__c: makeUID(["1002", reportingPeriod, geoArea])
         }
     })
 
