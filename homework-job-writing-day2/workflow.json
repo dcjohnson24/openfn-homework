@@ -6,13 +6,19 @@
           "adaptor": "postgresql",
           "configuration": "./tmp/postgres-creds.json",
           "expression": "./jobs/getPatientRows.js",
-          "next": { "createResults": { "condition": "!state.errors" } }
+          "next": { "mapPatients": { "condition": "!state.errors" } }
         },
         {
-          "id" : "createResults",
+          "id": "mapPatients",
+          "adaptor": "common",
+          "expression": "./jobs/mapPatients.js",
+          "next": { "syncPatients": { "condition": "!state.errors" }}
+        },
+        {
+          "id" : "syncPatients",
           "adaptor": "salesforce",
           "configuration":"./tmp/sf-credential.json",
-          "expression": "./jobs/createResults.js"
+          "expression": "./jobs/syncPatients.js"
         }
       ]
     }
